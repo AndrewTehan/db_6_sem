@@ -10,28 +10,14 @@ namespace TechnicsParService
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             string technicsParkServiceConnectionString = @"Data Source=LAPTOP-SN6OS1NR\MSSQLSERVER01;Initial Catalog=TechnicsParkService;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-            SqlConnection connection = new SqlConnection(technicsParkServiceConnectionString);
-            try
-            {                
-                await connection.OpenAsync();
-                Console.WriteLine("Подключение открыто");
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                {                    
-                    connection.Close();
-                    Console.WriteLine("Подключение закрыто...");
-                }
-            }
+            Db db = new Db(technicsParkServiceConnectionString);
+
+            Role role = new Role(db);
+            role.getAll();
 
             Console.WriteLine("Программа завершила работу.");
             Console.Read();
