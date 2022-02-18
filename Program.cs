@@ -16,8 +16,15 @@ namespace TechnicsParService
 
             Db db = new Db(technicsParkServiceConnectionString);
 
-            Role role = new Role(db);
-            role.getAll();
+            Role.DB = db;
+
+            Role.getAll();
+
+            Role.insert("new");
+            Role.getAll();
+
+            Role.delete(3);
+            Role.getAll();
 
             Console.WriteLine("Программа завершила работу.");
             Console.Read();
