@@ -7,28 +7,26 @@ using System.Threading.Tasks;
 
 namespace TechnicsParService
 {
-    static class Role
+    class Role : SqlCrud
     {
-        private static Db db;
-
-        public static Db DB
+        public Role(Db db)
         {
-            set { db = value; }
+            _db = db;
         }
 
-        public static bool insert(string name)
+        public override bool Insert(string name)
         {
-            db.openConnection();
+            _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"insert into roles(id, titel) values ({lastId() + 1}, '{name}')",
-                Connection = db.Connection
+                CommandText = $"insert into roles(id, titel) values ({LastId() + 1}, '{name}')",
+                Connection = _db.Connection
             };
 
             int changedRows = command.ExecuteNonQuery();
 
-            db.closeConnection();
+            _db.closeConnection();
 
             bool is_inserted = changedRows == 1;
             string message = changedRows == 1 ? "Роль добавлена" : "Роль не добавлена";
@@ -36,19 +34,19 @@ namespace TechnicsParService
             return is_inserted;
         }
 
-        public static bool delete(int id)
+        public override bool Delete(int id)
         {
-            db.openConnection();
+            _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
                 CommandText = $"delete from roles where id = {id}",
-                Connection = db.Connection
+                Connection = _db.Connection
             };
 
             int changedRows = command.ExecuteNonQuery();
 
-            db.closeConnection();
+            _db.closeConnection();
 
             bool is_deleted = changedRows == 1;
             string message = changedRows == 1 ? "Роль удалена" : "Роль не удалена";
@@ -56,21 +54,21 @@ namespace TechnicsParService
             return is_deleted;
         }
 
-        public static void getAll()
+        public override void GetAll()
         {
-            db.openConnection();
+            _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
                 CommandText = "select * from roles",
-                Connection = db.Connection
+                Connection = _db.Connection
             };
 
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
             {
-                string columnName1 = reader.GetName(0);                
+                string columnName1 = reader.GetName(0);
 
                 Console.WriteLine($"{columnName1}\t");
 
@@ -84,18 +82,17 @@ namespace TechnicsParService
             }
 
             reader.Close();
-            db.closeConnection();
+            _db.closeConnection();
 
             Console.WriteLine($"------------------------------------");
         }
 
-        private static int lastId()
+        public override int LastId()
         {
-
             SqlCommand command = new SqlCommand
             {
                 CommandText = "select top 1 * from roles order by id desc",
-                Connection = db.Connection
+                Connection = _db.Connection
             };
 
             int res = (int)command.ExecuteScalar();
