@@ -18,7 +18,6 @@ namespace TechnicsParService
 
         public abstract bool Delete(int id);
         public abstract void GetAll();
-        public abstract bool Insert(string name);
         public abstract int LastId();
     }
 }

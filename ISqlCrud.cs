@@ -8,8 +8,6 @@ namespace TechnicsParService
 {
     interface ISqlCrud
     {
-        bool Insert(string name);
-
         bool Delete(int id);
 
         void GetAll();

@@ -14,13 +14,13 @@ namespace TechnicsParService
             _db = db;
         }
 
-        public override bool Insert(string name)
+        public bool Insert(string name)
         {
             _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"insert into roles(id, titel) values ({LastId() + 1}, '{name}')",
+                CommandText = $"insert into roles(id, title) values ({LastId() + 1}, '{name}')",
                 Connection = _db.Connection
             };
 
@@ -52,6 +52,26 @@ namespace TechnicsParService
             string message = changedRows == 1 ? "Роль удалена" : "Роль не удалена";
             Console.WriteLine(message);
             return is_deleted;
+        }
+
+        public bool Update(int id, string title)
+        {
+            _db.openConnection();
+
+            SqlCommand command = new SqlCommand
+            {
+                CommandText = $"update roles set title = '{title}' where id = {id}",
+                Connection = _db.Connection
+            };
+
+            int changedRows = command.ExecuteNonQuery();
+
+            _db.closeConnection();
+
+            bool is_updated = changedRows == 1;
+            string message = is_updated ? "Роль обновлёна" : "Роль не обновлёна";
+            Console.WriteLine(message);
+            return is_updated;
         }
 
         public override void GetAll()
