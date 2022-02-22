@@ -58,6 +58,41 @@ namespace TechnicsParService
             park.GetAll();
         }
 
+        public static void WorkExapmle(Work work)
+        {
+            work.GetAll();
+
+            work.Insert("repair");
+            work.Update(3, "REPAIR");
+            work.GetAll();
+
+            work.Delete(3);
+            work.GetAll();
+        }
+
+        public static void TechniqueExapmle(Technique technique)
+        {
+            technique.GetAll();
+
+            technique.Insert(1, "car");
+            technique.Update(3, "CAR");
+            technique.GetAll();
+
+            technique.Delete(3);
+            technique.GetAll();
+        }
+
+        public static void ScheduleExapmle(Schedule schedule)
+        {
+            schedule.GetAll();
+
+            schedule.Insert(1, "park", "2022-02-17 22:00:00", "2022-02-24 22:10:00");
+            schedule.Update(3, "2022-02-24 22:20:00");
+            schedule.GetAll();
+
+            schedule.Delete(3);
+            schedule.GetAll();
+        }
 
         static void Main(string[] args)
         {
@@ -74,12 +109,20 @@ namespace TechnicsParService
             //Company company = new Company(db);
             //CompanyExample(company);
 
-            Park park = new Park(db);
-            ParkExapmle(park);
+            //Park park = new Park(db);
+            //ParkExapmle(park);
 
+            //Work work = new Work(db);
+            //WorkExapmle(work);
+
+            //Technique technique = new Technique(db);
+            //TechniqueExapmle(technique);
+
+            Schedule schedule = new Schedule(db);
+            ScheduleExapmle(schedule);
 
             Console.WriteLine("Программа завершила работу.");
             Console.Read();
-        }
+        }        
     }
 }
