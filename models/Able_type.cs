@@ -92,7 +92,7 @@ namespace TechnicsParService.models
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"delete from able_types where naem = {name}",
+                CommandText = $"delete from able_types where name = {name}",
                 Connection = _db.Connection
             };
 

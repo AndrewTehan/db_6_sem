@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TechnicsParService
 {
-    class Park_services : SqlCrud
+    class ParkService : SqlCrud
     {
-        public Park_services(Db db)
+        public ParkService(Db db)
         {
             _db = db;
         }
@@ -76,7 +76,7 @@ namespace TechnicsParService
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"update park_services set technique_id = {work_id} where id = {id}",
+                CommandText = $"update park_services set work_id = {work_id} where id = {id}",
                 Connection = _db.Connection
             };
 

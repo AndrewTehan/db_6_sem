@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechnicsParService
 {
-    class Park_services_places
+    class ParkServicesPlaces
     {
 
         private static Db db;
 
-        public Park_services_places(Db db)
+        public ParkServicesPlaces(Db db)
         {
             _db = db;
         }

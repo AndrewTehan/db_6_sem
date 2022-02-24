@@ -165,13 +165,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleStep.cs" />
     <Compile Include="models\Able_type.cs" />
     <Compile Include="models\Company.cs" />
     <Compile Include="Db.cs" />
     <Compile Include="ISqlCrud.cs" />
     <Compile Include="models\Park.cs" />
-    <Compile Include="models\Park_services.cs" />
-    <Compile Include="models\park_services_places.cs" />
+    <Compile Include="models\ParkService.cs" />
+    <Compile Include="models\ParkServicesPlaces.cs" />
     <Compile Include="models\Place.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

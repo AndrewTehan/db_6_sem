@@ -59,7 +59,7 @@ namespace TechnicsParService
             SqlCommand command = new SqlCommand
             {
                 CommandText = $"insert into sections(id, name, capacity, sectionable_id, sectionable_type)" +
-                               $"values ({LastId() + 1}, '{name}', {capacity}, {sectionable_id}, {sectionable_type})",
+                               $"values ({LastId() + 1}, '{name}', {capacity}, {sectionable_id}, '{sectionable_type}')",
                 Connection = _db.Connection
             };
 
@@ -79,7 +79,7 @@ namespace TechnicsParService
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"update works set name = {capacity} where id = {id}",
+                CommandText = $"update sections set capacity = {capacity} where id = {id}",
                 Connection = _db.Connection
             };
 
@@ -99,7 +99,7 @@ namespace TechnicsParService
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"delete from sectionds where id = {id}",
+                CommandText = $"delete from sections where id = {id}",
                 Connection = _db.Connection
             };
 
