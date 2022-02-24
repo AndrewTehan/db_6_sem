@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicsParService
+namespace Trucking
 {
-    class User : SqlCrud
+    class Driver : SqlCrud
     {
-        public User(Db db)
+        public Driver(Db db)
         {
             _db = db;
         }
@@ -21,7 +21,7 @@ namespace TechnicsParService
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"delete from users where id = {id}",
+                CommandText = $"delete from Driver where id = {id}",
                 Connection = _db.Connection
             };
 
@@ -41,7 +41,7 @@ namespace TechnicsParService
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = "select * from users",
+                CommandText = "select * from Driver",
                 Connection = _db.Connection
             };
 
@@ -54,16 +54,17 @@ namespace TechnicsParService
                 string columnName3 = reader.GetName(2);
                 string columnName4 = reader.GetName(3);
                 string columnName5 = reader.GetName(4);
+                string columnName6 = reader.GetName(5);
 
-                Console.WriteLine($"{columnName1}\t {columnName2}\t {columnName3}\t {columnName4}\t {columnName5}\t");
+                Console.WriteLine($"{columnName1}\t {columnName2}\t {columnName3}\t {columnName4}\t {columnName5}\t {columnName6}");
 
                 while (reader.Read())
                 {
                     object id = reader.GetValue(0);
-                    object nickname = reader.GetValue(1);
-                    object email = reader.GetValue(2);
+                    object lastname = reader.GetValue(1);
+                    object firstName = reader.GetValue(2);
 
-                    Console.WriteLine($"\t{id}: \t{nickname} \t{email} ...");
+                    Console.WriteLine($"\t{id}: \t{lastname} \t{firstName} ...");
                 }
             }
 
@@ -73,14 +74,14 @@ namespace TechnicsParService
             Console.WriteLine($"------------------------------------");
         }
 
-        public bool Insert(string nickname, string email, string password, int role_id)
+        public bool Insert(string lastName, string firstName, int DriverLicenseNumber, string category, int salary)
         {
             _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"insert into users(id, nickname, email, password, role_id)" +
-                               $"values ({LastId() + 1}, '{nickname}', '{email}', '{password}', {role_id})",
+                CommandText = $"insert into Driver(lastName, firstName, DriverLicenseNumber, category, salary)" +
+                               $"values ('{lastName}', '{firstName}', {DriverLicenseNumber}, '{category}', {salary})",
                 Connection = _db.Connection
             };
 
@@ -89,18 +90,18 @@ namespace TechnicsParService
             _db.closeConnection();
 
             bool is_inserted = changedRows == 1;
-            string message = changedRows == 1 ? "Роль добавлена" : "Роль не добавлена";
+            string message = changedRows == 1 ? "Водитель добавлен" : "Водитель не добавлен";
             Console.WriteLine(message);
             return is_inserted;
         }
 
-        public bool Update(int id, string nickname)
+        public bool Update(int id, string lastname)
         {
             _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"update users set nickname = '{nickname}' where id = {id}",
+                CommandText = $"update Driver set lastname = '{lastname}' where id = {id}",
                 Connection = _db.Connection
             };
 
@@ -109,7 +110,7 @@ namespace TechnicsParService
             _db.closeConnection();
 
             bool is_updated = changedRows == 1;
-            string message = is_updated ? "Пользователь одновлён" : "Пользователь не одновлён";
+            string message = is_updated ? "Водитель обновлён" : "Водитель не обновлён";
             Console.WriteLine(message);
             return is_updated;
         }
@@ -118,7 +119,7 @@ namespace TechnicsParService
         {
             SqlCommand command = new SqlCommand
             {
-                CommandText = "select top 1 * from users order by id desc",
+                CommandText = "select top 1 * from Driver order by id desc",
                 Connection = _db.Connection
             };
 

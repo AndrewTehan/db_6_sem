@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicsParService
+namespace Trucking
 {
     class Company : SqlCrud
     {
@@ -58,10 +58,10 @@ namespace TechnicsParService
                 while (reader.Read())
                 {
                     object id = reader.GetValue(0);
-                    object user_id = reader.GetValue(1);
+                    object Driver_id = reader.GetValue(1);
                     object name = reader.GetValue(2);                    
 
-                    Console.WriteLine($"\t{id}: \t{user_id} \t{name} ...");
+                    Console.WriteLine($"\t{id}: \t{Driver_id} \t{name} ...");
                 }
             }
 
@@ -71,14 +71,14 @@ namespace TechnicsParService
             Console.WriteLine($"------------------------------------");
         }
 
-        public bool Insert(int user_id, string name, string email)
+        public bool Insert(int Driver_id, string name, string email)
         {
             _db.openConnection();
 
             SqlCommand command = new SqlCommand
             {
-                CommandText = $"insert into companies(id, user_id, name, email)" +
-                               $"values ({LastId() + 1}, {user_id}, '{name}', '{email}')",
+                CommandText = $"insert into companies(id, Driver_id, name, email)" +
+                               $"values ({LastId() + 1}, {Driver_id}, '{name}', '{email}')",
                 Connection = _db.Connection
             };
 

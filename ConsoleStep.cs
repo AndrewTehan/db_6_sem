@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicsParService
+namespace Trucking
 {
     public enum Model
     {
-        Role = 1, User, Company, Park, ParkService, Technique, Schedule
+        Role = 1, Driver, Company, Park, ParkService, Technique, Schedule
     }
 
     public enum ModelCrud
@@ -32,7 +32,7 @@ namespace TechnicsParService
         public string ChooseModel()
         {
             Console.WriteLine($"{(int)Model.Role} - Role\n" +
-                              $"{(int)Model.User} - User\n" +
+                              $"{(int)Model.Driver} - Driver\n" +
                               $"{(int)Model.Company} - Company\n" +
                               $"{(int)Model.Park} - Park\n" +
                               $"{(int)Model.ParkService} - Park Service\n" +
@@ -52,10 +52,10 @@ namespace TechnicsParService
                 Role obj = new Role(db);
                 RoleCrud(enumCrud, obj);
             }
-            else if (enumModel == Model.User)
+            else if (enumModel == Model.Driver)
             {
-                User obj = new User(db);
-                UserCrud(enumCrud, obj);
+                Driver obj = new Driver(db);
+                DriverCrud(enumCrud, obj);
             }
             else if (enumModel == Model.Company)
             {
@@ -110,7 +110,7 @@ namespace TechnicsParService
             }
         }
 
-        public void UserCrud(ModelCrud modelCrud, User obj)
+        public void DriverCrud(ModelCrud modelCrud, Driver obj)
         {
             if (modelCrud == ModelCrud.Read)
             {
@@ -120,7 +120,7 @@ namespace TechnicsParService
             {
                 string[] inputParams = InputParamas();
 
-                obj.Insert(inputParams[0], inputParams[1], inputParams[2], int.Parse(inputParams[3]));
+                obj.Insert(inputParams[0], inputParams[1], int.Parse(inputParams[2]), inputParams[3], int.Parse(inputParams[4]));
             }
             else if (modelCrud == ModelCrud.Update)
             {

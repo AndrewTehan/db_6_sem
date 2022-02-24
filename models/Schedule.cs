@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicsParService
+namespace Trucking
 {
     class Schedule : SqlCrud
     {
@@ -39,10 +39,10 @@ namespace TechnicsParService
                 while (reader.Read())
                 {
                     object id = reader.GetValue(0);
-                    object user_id = reader.GetValue(1);
+                    object Driver_id = reader.GetValue(1);
                     object title = reader.GetValue(2);
 
-                    Console.WriteLine($"\t{id}: \t{user_id}, \t{title} ...");
+                    Console.WriteLine($"\t{id}: \t{Driver_id}, \t{title} ...");
                 }
             }
 

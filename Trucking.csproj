@@ -181,7 +181,7 @@
     <Compile Include="models\Section.cs" />
     <Compile Include="SqlCrud.cs" />
     <Compile Include="models\Technique.cs" />
-    <Compile Include="models\User.cs" />
+    <Compile Include="models\Driver.cs" />
     <Compile Include="models\Work.cs" />
   </ItemGroup>
   <ItemGroup>

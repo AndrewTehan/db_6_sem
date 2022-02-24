@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicsParService.models
+namespace Trucking.models
 {
     class Able_type : SqlCrud
     {
